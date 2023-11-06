@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
@@ -14,10 +14,10 @@ const Category = () => {
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination]}
+                // pagination={{
+                //     clickable: true,
+                // }}
+                // modules={[Pagination]}
                 className="mySwiper mx-auto mb-24 w-3/4"
             >
                 <SwiperSlide>
