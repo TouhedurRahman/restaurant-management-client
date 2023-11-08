@@ -22,7 +22,7 @@ const Category = () => {
             >
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide1.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white'>Salads</h3>
+                    <h3 className='text-4xl uppercase text-center -mt-16 text-white font-bold shadow-2xl'>Salads</h3>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide2.jpg' alt='slide-images' />

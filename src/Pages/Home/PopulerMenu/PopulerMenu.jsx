@@ -5,7 +5,7 @@ import MenuItem from "../../Shared/MenuItem/MenuItem";
 const PopulerMenu = () => {
     const [menu, setMenu] = useState([]);
     useEffect(() => {
-        const url = 'public/menu.json'
+        const url = './menu.json';
         fetch(url)
             .then(res => res.json())
             .then(data => {
