@@ -5,14 +5,15 @@ import MenuItem from "../../Shared/MenuItem/MenuItem";
 const PopulerMenu = () => {
     const [menu, setMenu] = useState([]);
     useEffect(() => {
-        const url = './menu.json';
+        const url = '/menu.json';
         fetch(url)
             .then(res => res.json())
             .then(data => {
                 const popularItems = data.filter(item => item.category === 'popular');
                 setMenu(popularItems);
             });
-    })
+    }, []);
+
     return (
         <div className="mb-12">
             <SectionTitle
