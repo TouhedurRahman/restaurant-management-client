@@ -3,15 +3,13 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import { ImQuotesLeft } from 'react-icons/im';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-import { Rating } from '@smastrom/react-rating'
-import '@smastrom/react-rating/style.css'
-import { BiSolidQuoteLeft } from 'react-icons/bi';
-
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
@@ -40,7 +38,7 @@ const Testimonials = () => {
                                 value={review.rating}
                                 readOnly
                             />
-                            <BiSolidQuoteLeft className="mt-8 text-4xl" />
+                            <ImQuotesLeft className="mt-8 text-4xl" />
                             <p className="py-8">{review.details}</p>
                             <h3 className="text-2xl text-orange-400">{review.name}</h3>
                         </div>
@@ -50,4 +48,5 @@ const Testimonials = () => {
         </div>
     )
 };
+
 export default Testimonials;

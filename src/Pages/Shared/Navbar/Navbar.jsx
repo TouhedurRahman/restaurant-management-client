@@ -1,21 +1,37 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            const scrolled = scrollTop > 0;
+            setIsScrolled(scrolled);
+        };
+        // Add scroll event listener when component mounts
+        window.addEventListener('scroll', handleScroll);
+
+        // Remove scroll event listener when component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     const navOptions = <>
-        <li><a>Item 1</a></li>
-        <li tabIndex={0}>
-            <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </details>
-        </li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/menu">Our Menu</Link></li>
         <li><a>Item 3</a></li>
     </>
 
     return (
         <>
-            <div className="navbar fixed max-w-screen-xl z-10 bg-opacity-30 bg-black text-white">
+            {/* <div className="navbar fixed max-w-screen-xl z-10 bg-opacity-30 bg-black text-white"> */}
+            <div
+                className={`navbar fixed max-w-screen-xl z-10 ${isScrolled ? 'bg-white text-black' : 'bg-black text-white bg-opacity-30'
+                    }`}
+            >
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -27,7 +43,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
+                    <a className="btn btn-ghost upper-case text-xl font-serif">Bistro Boss</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

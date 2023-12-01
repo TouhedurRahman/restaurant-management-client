@@ -22,23 +22,23 @@ const Category = () => {
             >
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide1.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white font-bold shadow-2xl'>Salads</h3>
+                    <h3 className='text-3xl uppercase text-center -mt-16 text-white font-bold italic bg-gray-800 p-2 rounded-md font-serif'>Salads</h3>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide2.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white'>Pizza</h3>
+                    <h3 className='text-3xl uppercase text-center -mt-16 text-white font-bold italic bg-gray-800 p-2 rounded-md font-serif'>Pizza</h3>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide3.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white'>Soap</h3>
+                    <h3 className='text-3xl uppercase text-center -mt-16 text-white font-bold italic bg-gray-800 p-2 rounded-md font-serif'>Soap</h3>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide4.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white'>Cake</h3>
+                    <h3 className='text-3xl uppercase text-center -mt-16 text-white font-bold italic bg-gray-800 p-2 rounded-md font-serif'>Cake</h3>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img src='../../../../src/assets/home/slide5.jpg' alt='slide-images' />
-                    <h3 className='text-4xl uppercase text-center -mt-16 text-white'>Salads</h3>
+                    <h3 className='text-3xl uppercase text-center -mt-16 text-white font-bold italic bg-gray-800 p-2 rounded-md font-serif'>Salads</h3>
                 </SwiperSlide>
             </Swiper>
         </>
