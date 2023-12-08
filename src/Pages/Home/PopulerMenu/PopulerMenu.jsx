@@ -3,18 +3,6 @@ import MenuItem from "../../Shared/MenuItem/MenuItem";
 import useMenu from "../../../Hooks/useMenu";
 
 const PopulerMenu = () => {
-    // const [menu, setMenu] = useState([]);
-
-    // useEffect(() => {
-    //     const url = '/menu.json';
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const popularItems = data.filter(item => item.category === 'popular');
-    //             setMenu(popularItems);
-    //         });
-    // }, []);
-
     const [menu] = useMenu();
     const populer = menu.filter(item => item.category === 'popular');
 
