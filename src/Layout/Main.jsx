@@ -5,16 +5,16 @@ import ScrollToTop from '../components/ScrollToTop/ScrollToTop';
 
 const Main = () => {
     const location = useLocation();
-    const isLoginPage = location.pathname.includes('login');
+    const isLogRegPage = location.pathname.includes('login') || location.pathname.includes('register');
 
     return (
         <div>
             {
-                isLoginPage || <Navbar />
+                isLogRegPage || <Navbar />
             }
             <Outlet />
             {
-                isLoginPage || <Footer />
+                isLogRegPage || <Footer />
             }
             <ScrollToTop />
         </div>
