@@ -29,6 +29,8 @@ const ScrollToTop = () => {
 
     return (
         <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
             className={`fixed bottom-4 right-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'
                 }`}
         >

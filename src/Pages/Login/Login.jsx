@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { logIn } = useContext(AuthContext);
@@ -12,6 +13,11 @@ const Login = () => {
     const [open, setOpen] = useState(false);
     const captchaRef = useRef(null);
     const [loginDisabled, setLoginDisabled] = useState(true);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || "/";
 
     const toggleBtn = () => {
         setOpen(!open);
@@ -25,6 +31,23 @@ const Login = () => {
         const email = data.email;
         const password = data.password;
         console.log(email, password);
+
+        logIn(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                console.log(user);
+                Swal.fire({
+                    icon: "success",
+                    title: "Login successfull!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from, { replace: true });
+            })
+        // .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        // });
     };
 
     const handleValidateCaptcha = () => {
@@ -40,14 +63,14 @@ const Login = () => {
 
     return (
         <div>
-            <div className="hero min-h-screen bg-[url('../../../src/assets/others/authentication.png')] lg:px-10 lg:m-10 rounded-lg">
-                <div className="hero-content flex-col lg:flex-row">
+            <div className="hero w-full bg-[url('../../../src/assets/others/authentication.png')]">
+                <div className="hero-content m-10 p-10 shadow-2xl rounded-lg flex-col lg:flex-row">
                     <div className="flex justify-center items-center">
-                        <div className="w-full w-1/2 rounded-xl shadow-lg">
+                        <div className="w-full w-1/2 rounded-xl">
                             <img src="../../../src/assets/others/authentication2.png" />
                         </div>
                     </div>
-                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10">
+                    <div className="card shrink-0 w-full max-w-sm p-10">
                         <h2 className='text-2xl text-center font-bold'>Login</h2>
                         <form onSubmit={handleSubmit(handleLogin)}>
                             <div className="form-control w-full max-w-xs">

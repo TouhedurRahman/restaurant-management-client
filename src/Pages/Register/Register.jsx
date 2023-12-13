@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Register = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [openPassword, setOpenPassword] = useState(false);
     const [openConfirmPassword, setOpenConfirmPassword] = useState(false);
@@ -19,18 +21,33 @@ const Register = () => {
 
     const handleRegister = data => {
         console.log(data)
+        const userName = data.name;
+        const userEmail = data.email;
+        const userPass = data.password;
+        const userConPass = data.confirmPassword;
+
+        if (userPass === userConPass) {
+            createUser(userEmail, userPass)
+                .then(userCredential => {
+                    const registeredUser = userCredential.userCredential;
+                    console.log(registeredUser)
+                });
+        }
+        else {
+            console.log("Password & confirm password must be same.")
+        }
     };
 
     return (
         <div>
-            <div className="hero min-h-screen bg-[url('../../../src/assets/others/authentication.png')] lg:px-10 lg:m-10 rounded-lg">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero w-full bg-[url('../../../src/assets/others/authentication.png')]">
+                <div className="hero-content m-10 p-10 shadow-2xl rounded-lg flex-col lg:flex-row-reverse">
                     <div className="flex justify-center items-center">
-                        <div className="w-full w-1/2 rounded-xl shadow-lg">
+                        <div className="w-full w-1/2 rounded-xl">
                             <img src="../../../src/assets/others/authentication2.png" />
                         </div>
                     </div>
-                    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10">
+                    <div className="card shrink-0 w-full max-w-sm p-10">
                         <h2 className='text-2xl text-center font-bold'>Register</h2>
                         <form onSubmit={handleSubmit(handleRegister)}>
                             <div className="form-control w-full max-w-xs">
