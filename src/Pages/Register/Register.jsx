@@ -5,7 +5,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [openPassword, setOpenPassword] = useState(false);
@@ -30,7 +30,17 @@ const Register = () => {
             createUser(userEmail, userPass)
                 .then(userCredential => {
                     const registeredUser = userCredential.userCredential;
-                    console.log(registeredUser)
+                    console.log(registeredUser);
+                    const userInfo = {
+                        displayName: userName
+                    }
+                    updateUserProfile(userInfo)
+                        .then(() => {
+                            console.log("User successfully registered.")
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 });
         }
         else {
