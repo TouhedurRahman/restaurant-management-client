@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+import { ImHome } from "react-icons/im";
+import { BsFillMenuButtonWideFill } from "react-icons/bs";
+import { IoFastFoodSharp } from "react-icons/io5";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -31,11 +34,11 @@ const Navbar = () => {
     }, []);
 
     const navOptions = <>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/menu">Our Menu</Link></li>
-        <li><Link to="/order/salad">Order Food</Link></li>
+        <li><Link to="/"> <ImHome /> Home</Link></li>
+        <li><Link to="/menu"><BsFillMenuButtonWideFill />Our Menu</Link></li>
+        <li><Link to="/order/salad"><IoFastFoodSharp /> Order Food</Link></li>
         <li>
-            <Link>
+            <Link to='/dashboard/mycart'>
                 <FaShoppingCart />
                 <div className="badge badge-secondary">{cart?.length || 0}</div>
             </Link>
