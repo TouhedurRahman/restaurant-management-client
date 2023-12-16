@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [cart] = useCart();
 
     const handleLogOut = () => {
         logOut()
@@ -31,11 +34,18 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order Food</Link></li>
+        <li>
+            <Link>
+                <FaShoppingCart />
+                <div className="badge badge-secondary">{cart?.length || 0}</div>
+            </Link>
+        </li>
 
         {
             user
                 ?
                 <>
+                    {/* <span>{user?.displayName}</span> */}
                     <li><Link onClick={handleLogOut}>Logout</Link></li>
                 </>
                 :
