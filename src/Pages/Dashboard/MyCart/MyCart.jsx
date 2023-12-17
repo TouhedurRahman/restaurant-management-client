@@ -1,15 +1,42 @@
 import { Helmet } from "react-helmet-async";
 import useCart from "../../../Hooks/useCart";
 import { MdOutlineDeleteSweep } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
-    const [cart] = useCart();
-    console.log(cart);
+    const [cart, refetch] = useCart();
+    // console.log(cart);
 
     const totalPrice = cart.reduce((accumulator, item) => accumulator + item.price, 0);
 
     const handleDelete = (item) => {
-        console.log(item, "Deleted");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const url = `http://localhost:5000/cart/${item._id}`;
+                fetch(url, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your item has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
     }
 
     return (
@@ -25,7 +52,6 @@ const MyCart = () => {
             <div>
                 <div className="overflow-x-auto m-5 p-5 shadow-lg">
                     <table className="table">
-                        {/* head */}
                         <thead>
                             <tr className="text-center rounded-lg shadow-lg">
                                 <th>Sl. No.</th>
