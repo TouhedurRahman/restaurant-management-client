@@ -14,7 +14,7 @@ const FoodCard = ({ item }) => {
     const location = useLocation();
 
     const handleAddToCart = (item) => {
-        console.log(item);
+        // console.log(item);
         if (user) {
             const cartItem = { menuItemId: _id, name, image, recipe, price, email: user.email }
             const url = 'http://localhost:5000/cart';

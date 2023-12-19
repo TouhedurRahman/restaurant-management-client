@@ -6,6 +6,7 @@ import useCart from "../../../Hooks/useCart";
 import { ImHome } from "react-icons/im";
 import { BsFillMenuButtonWideFill } from "react-icons/bs";
 import { IoFastFoodSharp } from "react-icons/io5";
+import { RiLogoutCircleRFill } from "react-icons/ri";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -49,7 +50,7 @@ const Navbar = () => {
                 ?
                 <>
                     {/* <span>{user?.displayName}</span> */}
-                    <li><Link onClick={handleLogOut}>Logout</Link></li>
+                    <li><Link onClick={handleLogOut}><RiLogoutCircleRFill /> Logout</Link></li>
                 </>
                 :
                 <>

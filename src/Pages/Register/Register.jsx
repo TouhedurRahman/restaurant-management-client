@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const [openPassword, setOpenPassword] = useState(false);
     const [openConfirmPassword, setOpenConfirmPassword] = useState(false);
+    const navigate = useNavigate();
 
     const toggleBtnPassword = () => {
         setOpenPassword(!openPassword);
@@ -19,34 +22,91 @@ const Register = () => {
         setOpenConfirmPassword(!openConfirmPassword);
     }
 
-    const handleRegister = data => {
-        console.log(data)
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        const url = "http://localhost:5000/users";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    reset();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'User created successfull.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    navigate('/');
+                }
+            })
+    }
+
+    const handleRegister = async (data) => {
         const userName = data.name;
         const userEmail = data.email;
         const userPass = data.password;
         const userConPass = data.confirmPassword;
 
-        if (userPass === userConPass) {
-            createUser(userEmail, userPass)
-                .then(userCredential => {
-                    const registeredUser = userCredential.userCredential;
-                    console.log(registeredUser);
-                    const userInfo = {
-                        displayName: userName
-                    }
-                    updateUserProfile(userInfo)
-                        .then(() => {
-                            console.log("User successfully registered.")
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
-                });
-        }
-        else {
-            console.log("Password & confirm password must be same.")
+        try {
+            if (userPass === userConPass) {
+                const userCredential = await createUser(userEmail, userPass);
+                const registeredUser = userCredential.user;
+
+                console.log(registeredUser);
+
+                const userInfo = {
+                    displayName: userName
+                };
+
+                await updateUserProfile(userInfo);
+
+                saveUser(userName, userEmail);
+            } else {
+                console.log("Password & confirm password must be the same.");
+            }
+        } catch (error) {
+            console.error("Error during registration: ", error);
         }
     };
+
+    // const handleRegister = data => {
+    //     // console.log(data)
+    //     const userName = data.name;
+    //     const userEmail = data.email;
+    //     const userPass = data.password;
+    //     const userConPass = data.confirmPassword;
+
+    //     if (userPass === userConPass) {
+    //         createUser(userEmail, userPass)
+    //             .then(userCredential => {
+    //                 const registeredUser = userCredential.user;
+    //                 console.log(registeredUser);
+
+    //                 const userInfo = {
+    //                     displayName: userName
+    //                 }
+    //                 updateUserProfile(userInfo)
+    //                     .then(() => {
+    //                         saveUser(userName, userEmail);
+    //                     })
+    //                     .catch(error => {
+    //                         console.log(error)
+    //                     });
+    //             })
+    //             .catch(error => {
+    //                 console.log(error)
+    //             });
+    //     }
+    //     else {
+    //         console.log("Password & confirm password must be same.")
+    //     }
+    // };
 
     return (
         <div>
@@ -182,9 +242,7 @@ const Register = () => {
                             Already have an account? <Link className='text-blue-700 hover:link' to='/login'>Please Login</Link>
                         </p>
 
-                        <div className="divider">OR</div>
-
-                        <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

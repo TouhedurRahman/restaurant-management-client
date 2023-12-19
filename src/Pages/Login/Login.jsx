@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const { logIn } = useContext(AuthContext);
@@ -154,9 +155,7 @@ const Login = () => {
                             New to Bistro? <Link className='text-blue-700 hover:link' to='/register'>Create an account</Link>
                         </p>
 
-                        <div className="divider">OR</div>
-
-                        <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>
