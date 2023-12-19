@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../Hooks/useCart";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const MyCart = () => {
     const [cart, refetch] = useCart();
@@ -40,17 +41,21 @@ const MyCart = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full m-5">
             <Helmet>
                 <title>Bistro | My Cart</title>
             </Helmet>
-            <div className="font-semi-bold  flex justify-between items-center p-5 m-5 shadow-lg text-sans">
-                <p className="text-3xl">Total Item(s) {cart.length}</p>
+            <SectionTitle
+                subHeding={"My Cart"}
+                heading={"Wanna Add More"}
+            ></SectionTitle>
+            <div className="font-semi-bold  flex justify-between items-center p-5 m-5 shadow-lg text-sans rounded-full">
+                <p className="text-3xl">Total Item(s) {cart.length < 10 ? `0${cart.length}` : `${cart.length}`}</p>
                 <p className="text-3xl">Total Price $ {totalPrice.toFixed(2)}/-</p>
                 <button className="btn btn-warning btn-sm">PAY</button>
             </div>
             <div>
-                <div className="overflow-x-auto m-5 p-5 shadow-lg">
+                <div className="overflow-x-auto m-5 p-5 shadow-lg rounded-lg">
                     <table className="table">
                         <thead>
                             <tr className="text-center rounded-lg shadow-lg">
