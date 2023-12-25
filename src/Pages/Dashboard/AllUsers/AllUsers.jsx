@@ -3,8 +3,6 @@ import { MdOutlineDeleteSweep } from "react-icons/md";
 import { FaUserShield } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
-import { useContext } from "react";
-import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -21,6 +19,9 @@ const AllUsers = () => {
             return res.json();
         }
     })
+
+    const noOfAdmins = users.filter(user => user.role === 'admin');
+    const noOfUsers = users.filter(user => user.role !== 'admin');
 
     const handleMakeAdmin = user => {
         Swal.fire({
@@ -92,9 +93,9 @@ const AllUsers = () => {
                 heading={"Manage All User's"}
             ></SectionTitle>
             <div className="font-semi-bold  flex justify-between items-center p-5 m-5 shadow-lg text-sans rounded-full">
-                <p className="text-3xl">Total Users {users.length < 10 ? `0${users.length}` : `${users.length}`}</p>
-                <p className="text-3xl">Total Admin 00</p>
-                <p className="text-3xl">Total User 00</p>
+                <p className="text-3xl">Sub Total {users.length < 10 ? `0${users.length}` : `${users.length}`}</p>
+                <p className="text-3xl">Total Admins {noOfAdmins.length < 10 ? `0${noOfAdmins.length}` : `${noOfAdmins.length}`}</p>
+                <p className="text-3xl">Total Users {noOfUsers.length < 10 ? `0${noOfUsers.length}` : `${noOfUsers.length}`}</p>
             </div>
             <div>
                 <div className="overflow-x-auto m-5 p-5 shadow-lg rounded-lg">
