@@ -1,15 +1,15 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+import { useEffect } from "react";
+import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
     baseURL: "http://localhost:5000/"
 });
 
 const useAxiosSecure = () => {
-    const { logOut } = useContext(AuthContext);
+    const { logOut } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 

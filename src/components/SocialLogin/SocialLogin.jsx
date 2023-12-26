@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
-    const { googleLogIn } = useContext(AuthContext);
+    const { googleLogIn } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
