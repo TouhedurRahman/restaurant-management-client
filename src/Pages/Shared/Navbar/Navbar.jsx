@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
 import { ImHome } from "react-icons/im";
 import { BsFillMenuButtonWideFill } from "react-icons/bs";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { RiLogoutCircleRFill } from "react-icons/ri";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useAuth();
     const [isScrolled, setIsScrolled] = useState(false);
     const [cart] = useCart();
 

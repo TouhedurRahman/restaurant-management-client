@@ -3,10 +3,11 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useCart = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { data: cart = [], refetch } = useQuery({
         queryKey: ["cart", user?.email],
+        enabled: !loading,
         /*
         queryFn: async () => {
             const url = `http://localhost:5000/cart?email=${user?.email}`;

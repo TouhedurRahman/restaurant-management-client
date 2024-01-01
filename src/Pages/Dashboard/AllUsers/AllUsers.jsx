@@ -4,6 +4,7 @@ import { FaUserShield } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
     // const { data: users = [] } = useQuery(['users'], async () => {
@@ -11,12 +12,14 @@ const AllUsers = () => {
     //     return res.json();
     // });
 
+    const axiosSecure = useAxiosSecure();
+
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const url = `http://localhost:5000/users`;
-            const res = await fetch(url);
-            return res.json();
+            const url = `/users`;
+            const res = await axiosSecure.get(url);
+            return res.data;
         }
     })
 

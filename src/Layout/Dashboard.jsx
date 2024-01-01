@@ -7,10 +7,11 @@ import { IoFastFoodSharp } from "react-icons/io5";
 import { PiUserSwitchFill } from "react-icons/pi";
 import { RiSoundModuleFill } from "react-icons/ri";
 import { FaUtensils } from "react-icons/fa";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
     const isAdmin = true;
-
+    // const [isAdmin] = useAdmin();
 
     return (
         <div>
@@ -30,7 +31,7 @@ const Dashboard = () => {
                                 ?
                                 <>
                                     <li><NavLink to="/adminhome"><ImHome /> Admin Home</NavLink></li>
-                                    <li><NavLink to="/dashboard/additems"><FaUtensils /> Add Items </NavLink></li>
+                                    <li><NavLink to="/dashboard/Additem"><FaUtensils /> Add Items </NavLink></li>
                                     <li><NavLink to="/dashboard/manageitems"><RiSoundModuleFill /> Manage Items</NavLink></li>
                                     <li><NavLink to="/dashboard/managebookings"><FaBook /> Manage Bookings</NavLink></li>
                                     <li><NavLink to="/dashboard/allusers"><PiUserSwitchFill />All Users</NavLink></li>
@@ -43,7 +44,6 @@ const Dashboard = () => {
                                     <li><NavLink to="/dashboard/mycart"><FaShoppingCart /> My Cart</NavLink></li>
                                 </>
                         }
-
 
                         <div className="divider">OR</div>
 
