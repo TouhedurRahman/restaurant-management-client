@@ -123,7 +123,7 @@ const AllUsers = () => {
                                                 ?
                                                 `0${idx + 1}`
                                                 :
-                                                `{idx+1}`
+                                                `${idx + 1}`
                                         }
                                     </td>
                                     <td>
