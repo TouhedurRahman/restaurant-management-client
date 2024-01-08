@@ -3,10 +3,14 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 import RequiredFieldErrorMsg from "../../../components/RequiredFieldErrorMsg/RequiredFieldErrorMsg";
 import { FaUtensils } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const img_hosting_token = import.meta.env.VITE_Img_Upload_Token;
 
 const AddItem = () => {
+    const [categoryErrVisible, setCategoryErrVisible] = useState(false);
     const {
         register,
         handleSubmit,
@@ -14,10 +18,16 @@ const AddItem = () => {
         formState: { errors },
     } = useForm();
 
-    const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=300&key=${img_hosting_token}`;
+    const axiosSecure = useAxiosSecure();
+
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
     const handleAddItem = (data) => {
-        console.log(data);
+        setCategoryErrVisible(false);
+        if (data.category === "default") {
+            setCategoryErrVisible(true);
+            return;
+        }
 
         // upload image to Imagebb
         const formData = new FormData();
@@ -39,6 +49,18 @@ const AddItem = () => {
                     image: imgURL
                 }
                 console.log(newItem);
+                axiosSecure.post('/menu', newItem)
+                    .then(data => {
+                        if (data.data.insertedId) {
+                            reset();
+                            Swal.fire({
+                                icon: "success",
+                                title: "Your work has been saved",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                    })
             })
     }
 
@@ -86,9 +108,9 @@ const AddItem = () => {
                                 <option value="dessert">Dessert</option>
                                 <option value="drinks">Drinks</option>
                             </select>
-                            {/* {categoryErrVisible && (
+                            {categoryErrVisible && (
                                 <span className="text-red-500">Please choose a category</span>
-                            )} */}
+                            )}
                         </div>
                         {/* price */}
                         <div className="form-control w-full">
