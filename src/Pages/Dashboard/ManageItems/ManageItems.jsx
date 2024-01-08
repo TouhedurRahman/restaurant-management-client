@@ -3,13 +3,38 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { FaPencil } from "react-icons/fa6";
 import { FaTrashAlt } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageItems = () => {
-    const [menu, loading] = useMenu();
+    const [menu, loading, refetch] = useMenu();
+    const axiosSecure = useAxiosSecure();
 
-    const handleDeleteItem = () => {
-
-    }
+    const handleDeleteItem = async (id, name) => {
+        // console.log({ id, name });
+        const { isConfirmed } = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        });
+        if (isConfirmed) {
+            const { data } = await axiosSecure.delete(`/menu/${id}`);
+            if (data.deletedCount > 0) {
+                // refetch data to update ui
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: `"${name}" successfully deleted.`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        }
+    };
 
     return (
         <div className="w-full m-5">
