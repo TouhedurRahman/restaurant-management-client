@@ -26,11 +26,13 @@ const useAxiosSecure = () => {
         axiosSecure.interceptors.response.use(
             (response) => response,
             (error) => {
-                const status = error.response.status;
-                if (status === 401 || status === 403) {
-                    logOut();
-                    toast.error("Something went wrong. Please login again.");
-                    navigate("/login", { state: { from: location } });
+                if (error.response) {
+                    const status = error.response.status;
+                    if (status === 401 || status === 403) {
+                        logOut();
+                        toast.error("Something went wrong. Please login again.");
+                        navigate("/login", { state: { from: location } });
+                    }
                 }
                 return Promise.reject(error);
             }

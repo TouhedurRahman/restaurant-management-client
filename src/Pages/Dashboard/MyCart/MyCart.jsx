@@ -3,6 +3,7 @@ import useCart from "../../../Hooks/useCart";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
     const [cart, refetch] = useCart();
@@ -52,7 +53,9 @@ const MyCart = () => {
             <div className="font-semi-bold  flex justify-between items-center p-5 m-5 shadow-lg text-sans rounded-full">
                 <p className="text-3xl">Total Item(s) {cart.length < 10 ? `0${cart.length}` : `${cart.length}`}</p>
                 <p className="text-3xl">Total Price $ {totalPrice.toFixed(2)}/-</p>
-                <button className="btn btn-warning btn-sm">PAY</button>
+                <Link to='/dashboard/payment'>
+                    <button className="btn btn-warning btn-sm">PAY</button>
+                </Link>
             </div>
             <div>
                 <div className="overflow-x-auto m-5 p-5 shadow-lg rounded-lg">

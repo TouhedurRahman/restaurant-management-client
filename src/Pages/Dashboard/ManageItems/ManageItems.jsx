@@ -58,7 +58,7 @@ const ManageItems = () => {
                                 <thead>
                                     <tr className="rounded-lg shadow-lg">
                                         <th className="text-center">Sl. No.</th>
-                                        <th>Image</th>
+                                        <th className="text-center">Image</th>
                                         <th>Name</th>
                                         <th className="text-right">Price</th>
                                         <th className="text-center">Update</th>
@@ -80,7 +80,7 @@ const ManageItems = () => {
                                                 }
                                             </td>
                                             <td>
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center justify-center gap-3">
                                                     <div className="avatar">
                                                         <div className="mask mask-squircle w-12 h-12">
                                                             <img src={image} alt={name} />

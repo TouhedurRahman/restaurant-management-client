@@ -31,12 +31,12 @@ const Login = () => {
     const handleLogin = (data) => {
         const email = data.email;
         const password = data.password;
-        console.log(email, password);
+        // console.log(email, password);
 
         logIn(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                console.log(user);
+                // console.log(user);
                 Swal.fire({
                     icon: "success",
                     title: "Login successfull!",
@@ -45,15 +45,11 @@ const Login = () => {
                 });
                 navigate(from, { replace: true });
             })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        // });
     };
 
     const handleValidateCaptcha = () => {
         const captchaValue = captchaRef.current.value;
-        console.log(captchaValue);
+        // console.log(captchaValue);
 
         if (validateCaptcha(captchaValue)) {
             setLoginDisabled(false);
