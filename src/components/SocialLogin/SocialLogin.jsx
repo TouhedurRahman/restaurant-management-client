@@ -14,7 +14,7 @@ const SocialLogin = () => {
         googleLogIn()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
+                // console.log(loggedUser);
 
                 const user = { name: loggedUser.displayName, email: loggedUser.email };
                 const url = "http://localhost:5000/users";

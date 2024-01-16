@@ -7,9 +7,12 @@ import { BsFillMenuButtonWideFill } from "react-icons/bs";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
     const [isScrolled, setIsScrolled] = useState(false);
     const [cart] = useCart();
 
@@ -39,11 +42,21 @@ const Navbar = () => {
         <li><Link to="/menu"><BsFillMenuButtonWideFill />Our Menu</Link></li>
         <li><Link to="/order/salad"><IoFastFoodSharp /> Order Food</Link></li>
         <li>
-            <Link to='/dashboard/mycart'>
-                <FaShoppingCart />
-                <div className="badge badge-secondary">{cart?.length || 0}</div>
+            <Link
+                to={isAdmin ? '/dashboard/adminhome' : '/dashboard/userhome'}
+            >
+                <LuLayoutDashboard /> Dashboard
             </Link>
         </li>
+        {
+            !isAdmin &&
+            <li>
+                <Link to='/dashboard/mycart'>
+                    <FaShoppingCart />
+                    <div className="badge badge-secondary">{cart?.length || 0}</div>
+                </Link>
+            </li>
+        }
 
         {
             user

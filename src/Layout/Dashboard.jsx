@@ -29,7 +29,7 @@ const Dashboard = () => {
                             isAdmin
                                 ?
                                 <>
-                                    <li><NavLink to="/adminhome"><ImHome /> Admin Home</NavLink></li>
+                                    <li><NavLink to="/dashboard/adminhome"><ImHome /> Admin Home</NavLink></li>
                                     <li><NavLink to="/dashboard/Additem"><FaUtensils /> Add Items </NavLink></li>
                                     <li><NavLink to="/dashboard/manageitems"><RiSoundModuleFill /> Manage Items</NavLink></li>
                                     <li><NavLink to="/dashboard/managebookings"><FaBook /> Manage Bookings</NavLink></li>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                                 </>
                                 :
                                 <>
-                                    <li><NavLink to="/"><ImHome /> User Home</NavLink></li>
+                                    <li><NavLink to="/dashboard/userhome"><ImHome /> User Home</NavLink></li>
                                     <li><NavLink to="/dashboard/reservation"><FaCalendarAlt /> Reservation</NavLink></li>
                                     <li><NavLink to="/dashboard/paymenthistorty"><GiWallet /> Payment History</NavLink></li>
                                     <li><NavLink to="/dashboard/mycart"><FaShoppingCart /> My Cart</NavLink></li>
